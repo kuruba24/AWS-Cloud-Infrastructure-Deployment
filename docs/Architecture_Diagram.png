@@ -1,0 +1,19 @@
+                Internet
+                    │
+          Internet Gateway
+                    │
+               Amazon VPC
+                    │
+             Public Subnet
+                    │
+        Elastic Load Balancer
+                    │
+              EC2 Instance
+              /          \
+       Amazon S3     CloudWatch
+
+               IAM
+                │
+       Auto Scaling Group
+                │
+CodePipeline → CodeBuild → CodeDeploy
