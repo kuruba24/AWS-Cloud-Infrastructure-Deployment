@@ -1,0 +1,202 @@
+<svg viewBox="0 0 1600 1180" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+
+  <defs>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#FF9900"/>
+    </marker>
+    <marker id="arrowNavy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#232F3E"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1600" height="1180" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="800" y="46" text-anchor="middle" font-size="30" font-weight="700" fill="#232F3E">AWS Cloud Infrastructure Deployment Architecture</text>
+  <rect x="600" y="60" width="400" height="4" fill="#FF9900"/>
+
+  <!-- ===================== INTERNET ===================== -->
+  <g>
+    <rect x="40" y="205" width="150" height="100" rx="10" fill="#F5F6F8" stroke="#232F3E" stroke-width="2"/>
+    <circle cx="115" cy="240" r="16" fill="#232F3E"/>
+    <text x="115" y="278" text-anchor="middle" font-size="16" font-weight="700" fill="#232F3E">Internet</text>
+    <text x="115" y="295" text-anchor="middle" font-size="11" fill="#5A6472">End Users</text>
+  </g>
+  <line x1="190" y1="255" x2="248" y2="255" stroke="#232F3E" stroke-width="2.5" marker-end="url(#arrowNavy)"/>
+
+  <!-- ===================== INTERNET GATEWAY ===================== -->
+  <g>
+    <rect x="250" y="205" width="180" height="100" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="266" y="221" width="42" height="42" rx="8" fill="#FF9900"/>
+    <text x="287" y="248" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">IGW</text>
+    <text x="330" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">Internet</text>
+    <text x="330" y="258" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">Gateway</text>
+    <text x="330" y="278" text-anchor="middle" font-size="11" fill="#5A6472">Entry point to VPC</text>
+  </g>
+  <line x1="430" y1="255" x2="470" y2="255" stroke="#232F3E" stroke-width="2.5" marker-end="url(#arrowNavy)"/>
+
+  <!-- ===================== VPC CONTAINER ===================== -->
+  <rect x="472" y="120" width="1088" height="560" rx="14" fill="#FFFDF8" stroke="#FF9900" stroke-width="2.5" stroke-dasharray="10 6"/>
+  <text x="496" y="148" font-size="16" font-weight="700" fill="#FF9900">Custom Amazon VPC (10.0.0.0/16)</text>
+
+  <!-- Public Subnet -->
+  <rect x="500" y="168" width="770" height="470" rx="12" fill="#FFFFFF" stroke="#232F3E" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="522" y="194" font-size="14" font-weight="700" fill="#232F3E">Public Subnet (10.0.1.0/24)</text>
+  <text x="522" y="210" font-size="10" fill="#5A6472">Route Table: 0.0.0.0/0 → IGW  |  Security Group (web-sg): 80/443 inbound</text>
+
+  <!-- Private Subnet -->
+  <rect x="1290" y="168" width="246" height="470" rx="12" fill="#FBFBFC" stroke="#232F3E" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="1312" y="194" font-size="14" font-weight="700" fill="#232F3E">Private Subnet (10.0.2.0/24)</text>
+  <text x="1312" y="210" font-size="10" fill="#5A6472">Route Table: local only</text>
+  <text x="1312" y="224" font-size="10" fill="#5A6472">Security Group (db-sg):</text>
+  <text x="1312" y="238" font-size="10" fill="#5A6472">restricted to app tier</text>
+  <rect x="1310" y="260" width="206" height="150" rx="10" fill="#F5F6F8" stroke="#8A94A6" stroke-width="1.6" stroke-dasharray="3 3"/>
+  <text x="1413" y="325" text-anchor="middle" font-size="11.5" fill="#5A6472" font-weight="600">Reserved for</text>
+  <text x="1413" y="343" text-anchor="middle" font-size="11.5" fill="#5A6472" font-weight="600">backend / database tier</text>
+  <text x="1413" y="361" text-anchor="middle" font-size="10" fill="#8A94A6" font-style="italic">(future scope — no</text>
+  <text x="1413" y="376" text-anchor="middle" font-size="10" fill="#8A94A6" font-style="italic">direct internet route)</text>
+
+  <!-- Arrow from IGW into ALB -->
+  <path d="M470,255 L500,255 L500,320 L536,320" fill="none" stroke="#232F3E" stroke-width="2.5" marker-end="url(#arrowNavy)"/>
+
+  <!-- ALB -->
+  <g>
+    <rect x="540" y="270" width="210" height="110" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="558" y="286" width="46" height="46" rx="8" fill="#FF9900"/>
+    <text x="581" y="315" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">ALB</text>
+    <text x="655" y="308" text-anchor="middle" font-size="13.5" font-weight="700" fill="#232F3E">Application</text>
+    <text x="655" y="325" text-anchor="middle" font-size="13.5" font-weight="700" fill="#232F3E">Load Balancer</text>
+    <text x="655" y="344" text-anchor="middle" font-size="10.5" fill="#5A6472">Distributes traffic</text>
+  </g>
+  <line x1="750" y1="325" x2="798" y2="325" stroke="#232F3E" stroke-width="2.5" marker-end="url(#arrowNavy)"/>
+
+  <!-- Auto Scaling Group container -->
+  <rect x="800" y="235" width="460" height="220" rx="12" fill="#F4FAF6" stroke="#2E8B57" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="820" y="260" font-size="13.5" font-weight="700" fill="#2E8B57">Auto Scaling Group</text>
+
+  <!-- EC2 instance 1 -->
+  <g>
+    <rect x="828" y="285" width="190" height="140" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="846" y="301" width="46" height="46" rx="8" fill="#FF9900"/>
+    <text x="869" y="330" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">EC2</text>
+    <text x="923" y="325" text-anchor="middle" font-size="13.5" font-weight="700" fill="#232F3E">EC2 Instance</text>
+    <text x="923" y="343" text-anchor="middle" font-size="10.5" fill="#5A6472">Web / App Server</text>
+  </g>
+
+  <!-- EC2 instance 2 (scaling) -->
+  <g opacity="0.85">
+    <rect x="1042" y="285" width="190" height="140" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="1060" y="301" width="46" height="46" rx="8" fill="#FF9900"/>
+    <text x="1083" y="330" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">EC2</text>
+    <text x="1137" y="325" text-anchor="middle" font-size="13.5" font-weight="700" fill="#232F3E">EC2 Instance</text>
+    <text x="1137" y="343" text-anchor="middle" font-size="10.5" fill="#5A6472">Scaled Copy</text>
+  </g>
+  <text x="1040" y="470" text-anchor="middle" font-size="11" fill="#2E8B57" font-style="italic">Scales instance count automatically based on demand</text>
+
+  <!-- ===================== S3 / CLOUDWATCH / IAM ROW ===================== -->
+  <!-- S3 -->
+  <g>
+    <rect x="560" y="710" width="230" height="120" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="578" y="726" width="46" height="46" rx="8" fill="#FF9900"/>
+    <text x="601" y="755" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">S3</text>
+    <text x="690" y="748" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">Amazon S3</text>
+    <text x="690" y="766" text-anchor="middle" font-size="10.5" fill="#5A6472">Static content, backups</text>
+    <text x="690" y="781" text-anchor="middle" font-size="10.5" fill="#5A6472">and application files</text>
+  </g>
+
+  <!-- CloudWatch -->
+  <g>
+    <rect x="880" y="710" width="230" height="120" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="898" y="726" width="46" height="46" rx="8" fill="#FF9900"/>
+    <text x="921" y="755" text-anchor="middle" font-size="9.5" font-weight="700" fill="#FFFFFF">CW</text>
+    <text x="1010" y="748" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">Amazon CloudWatch</text>
+    <text x="1010" y="766" text-anchor="middle" font-size="10.5" fill="#5A6472">Metrics, logs &amp; alarms</text>
+    <text x="1010" y="781" text-anchor="middle" font-size="10.5" fill="#5A6472">for EC2 performance</text>
+  </g>
+
+  <!-- IAM -->
+  <g>
+    <rect x="1200" y="710" width="230" height="120" rx="10" fill="#EFF1F5" stroke="#232F3E" stroke-width="2"/>
+    <rect x="1218" y="726" width="46" height="46" rx="8" fill="#232F3E"/>
+    <text x="1241" y="755" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">IAM</text>
+    <text x="1330" y="748" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">AWS IAM</text>
+    <text x="1330" y="766" text-anchor="middle" font-size="10.5" fill="#5A6472">Secure access control for</text>
+    <text x="1330" y="781" text-anchor="middle" font-size="10.5" fill="#5A6472">EC2, S3 &amp; other resources</text>
+  </g>
+
+  <!-- Arrows EC2 -> S3 and EC2 -> CloudWatch -->
+  <path d="M900,425 L900,600 L675,600 L675,708" fill="none" stroke="#FF9900" stroke-width="2.2" marker-end="url(#arrowOrange)"/>
+  <text x="760" y="595" text-anchor="middle" font-size="10.5" fill="#8A5A00">store objects</text>
+
+  <path d="M960,425 L960,660 L995,660 L995,708" fill="none" stroke="#FF9900" stroke-width="2.2" marker-end="url(#arrowOrange)"/>
+  <text x="1000" y="655" text-anchor="middle" font-size="10.5" fill="#8A5A00">metrics / logs</text>
+
+  <!-- IAM dashed access-control connectors -->
+  <path d="M1200,770 L1120,770 L1120,530 L1030,530" fill="none" stroke="#232F3E" stroke-width="1.6" stroke-dasharray="4 4"/>
+  <path d="M1200,745 L790,745 L790,770" fill="none" stroke="#232F3E" stroke-width="1.6" stroke-dasharray="4 4"/>
+  <path d="M1200,760 L1110,760 L1110,770" fill="none" stroke="#232F3E" stroke-width="1.6" stroke-dasharray="4 4"/>
+  <text x="1315" y="853" text-anchor="middle" font-size="10.5" fill="#5A6472" font-style="italic">- - - IAM policies govern access to EC2, S3 &amp; CloudWatch</text>
+
+  <!-- ===================== DIVIDER ===================== -->
+  <line x1="60" y1="885" x2="1540" y2="885" stroke="#DADFE6" stroke-width="1.5"/>
+  <text x="800" y="920" text-anchor="middle" font-size="20" font-weight="700" fill="#232F3E">CI/CD Deployment Pipeline</text>
+
+  <!-- ===================== CI/CD ROW ===================== -->
+  <!-- GitHub -->
+  <g>
+    <rect x="70" y="955" width="230" height="110" rx="10" fill="#F5F6F8" stroke="#232F3E" stroke-width="2"/>
+    <rect x="88" y="971" width="46" height="46" rx="8" fill="#232F3E"/>
+    <text x="111" y="1002" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">GH</text>
+    <text x="200" y="998" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">GitHub</text>
+    <text x="200" y="1016" text-anchor="middle" font-size="10.5" fill="#5A6472">Source Repository</text>
+  </g>
+  <line x1="300" y1="1010" x2="358" y2="1010" stroke="#FF9900" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+
+  <!-- CodePipeline -->
+  <g>
+    <rect x="360" y="955" width="230" height="110" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="378" y="971" width="46" height="46" rx="8" fill="#FF9900"/>
+    <text x="401" y="1000" text-anchor="middle" font-size="9.5" font-weight="700" fill="#FFFFFF">CP</text>
+    <text x="490" y="998" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">CodePipeline</text>
+    <text x="490" y="1016" text-anchor="middle" font-size="10.5" fill="#5A6472">Orchestrates workflow</text>
+  </g>
+  <line x1="590" y1="1010" x2="648" y2="1010" stroke="#FF9900" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+
+  <!-- CodeBuild -->
+  <g>
+    <rect x="650" y="955" width="230" height="110" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="668" y="971" width="46" height="46" rx="8" fill="#FF9900"/>
+    <text x="691" y="1000" text-anchor="middle" font-size="9.5" font-weight="700" fill="#FFFFFF">CB</text>
+    <text x="780" y="998" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">CodeBuild</text>
+    <text x="780" y="1016" text-anchor="middle" font-size="10.5" fill="#5A6472">Builds &amp; tests code</text>
+  </g>
+  <line x1="880" y1="1010" x2="938" y2="1010" stroke="#FF9900" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+
+  <!-- CodeDeploy -->
+  <g>
+    <rect x="940" y="955" width="230" height="110" rx="10" fill="#FFF3E0" stroke="#FF9900" stroke-width="2"/>
+    <rect x="958" y="971" width="46" height="46" rx="8" fill="#FF9900"/>
+    <text x="981" y="1000" text-anchor="middle" font-size="9.5" font-weight="700" fill="#FFFFFF">CD</text>
+    <text x="1070" y="998" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">CodeDeploy</text>
+    <text x="1070" y="1016" text-anchor="middle" font-size="10.5" fill="#5A6472">Deploys build artifacts</text>
+  </g>
+
+  <!-- Arrow CodeDeploy up to EC2 in ASG -->
+  <path d="M1170,955 L1170,900 L960,900 L960,428" fill="none" stroke="#FF9900" stroke-width="2.6" marker-end="url(#arrowOrange)"/>
+  <text x="1060" y="893" text-anchor="middle" font-size="11" fill="#8A5A00" font-weight="600">Deploys new application version to EC2</text>
+
+  <!-- ===================== LEGEND ===================== -->
+  <g>
+    <rect x="1200" y="1085" width="16" height="4" fill="#232F3E"/>
+    <text x="1224" y="1092" font-size="11" fill="#5A6472">Network / Traffic Flow</text>
+
+    <rect x="1200" y="1108" width="16" height="4" fill="#FF9900"/>
+    <text x="1224" y="1115" font-size="11" fill="#5A6472">Data / Deployment Flow</text>
+
+    <line x1="1200" y1="1132" x2="1216" y2="1132" stroke="#232F3E" stroke-width="1.6" stroke-dasharray="4 4"/>
+    <text x="1224" y="1138" font-size="11" fill="#5A6472">Access Control (IAM)</text>
+  </g>
+
+  <text x="60" y="1150" font-size="11" fill="#9AA3B0">AWS Cloud Infrastructure Deployment Architecture — Prepared for GitHub README / Technical Portfolio</text>
+</svg>
