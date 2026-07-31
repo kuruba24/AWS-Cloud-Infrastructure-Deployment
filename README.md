@@ -1,5 +1,7 @@
 # AWS Cloud Infrastructure Deployment
 
+![AWS Cloud Infrastructure Deployment Architecture](aws_architecture.svg)
+
 ## Project Overview
 
 This project demonstrates the deployment of a secure, scalable, and highly available cloud infrastructure using Amazon Web Services (AWS). The project focuses on designing cloud networking, deploying compute resources, implementing storage solutions, monitoring system performance, and automating deployments using CI/CD services.
@@ -29,9 +31,9 @@ This project demonstrates the deployment of a secure, scalable, and highly avail
 | CloudWatch | Monitoring |
 | Elastic Load Balancer | Load Balancing |
 | Auto Scaling | Automatic Scaling |
-| CodePipeline | CI/CD Pipeline |
-| CodeBuild | Build Automation |
-| CodeDeploy | Application Deployment |
+| Code Pipeline | CI/CD Pipeline |
+| Code Build | Build Automation |
+| Code Deploy | Application Deployment |
 
 ---
 
